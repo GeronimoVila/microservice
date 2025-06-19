@@ -28,11 +28,7 @@ public class OrderMapper {
         Order order = new Order();
         order.setOrderDate(java.time.LocalDateTime.now());
         order.setStatus(OrderStatus.PENDING);
-
-        // Asignar cliente
         order.setCustomer(customer);
-
-        // Mapear los OrderItems y asignar la orden en cada uno
         order.setOrderItems(
                 orderDTO.getOrderItems().stream()
                         .map(dto -> {
@@ -43,7 +39,6 @@ public class OrderMapper {
                         .collect(Collectors.toList())
         );
 
-        // Mapear ShippingDetails si viene
         if (orderDTO.getShippingDetails() != null) {
             ShippingDetails shippingDetails = shippingDetailsMapper.dtoToEntity(orderDTO.getShippingDetails());
             shippingDetails.setOrder(order);

@@ -22,13 +22,11 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductsMappers productsMappers;
 
-    // ********************* PRODUCTS **********************************
-    //OBTENER TODOS LOS PRODUCTOS
+
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
 
-    //OBTENER PRODUCTOS POR ID
     public Product getProductById(Long id){
         Optional<Product> productOptional = productRepository.findById(id);
         if (productOptional.isEmpty()){
@@ -38,17 +36,14 @@ public class ProductService {
         }
     }
 
-    //CREAR PRODUCTO
     public void createProduct(Product product){
         productRepository.save(product);
     }
 
-    //BORRAR PRODUCTO
     public void deleteProductByID(Long id){
         productRepository.deleteById(id);
     }
 
-    //MODIFICAR PRODUCTO POR ID
     public void editProductByID(Product product, Long id){
         Product existProduct = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
@@ -62,8 +57,6 @@ public class ProductService {
         productRepository.save(existProduct);
     }
 
-    // ********************* DTO **********************************
-    //OBTENER EL DTO DE PRODUCTO (SOLO ID, NOMBRE Y CATEGORIA)
     public List<ProductInfoDTO> getAllInfoProducts(){
         return productRepository.findAll()
                 .stream()
@@ -71,30 +64,15 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    //CARGAR EL DTO SIN MAPPER
-//    public ResponseEntity<Object> newProduct(ProductDTO productDTO){
-//        Product productEntity = new Product();
-//        productEntity.setName(productDTO.getName());
-//        productEntity.setPrice(productDTO.getPrice());
-//        productEntity.setStatus(Boolean.TRUE);
-//        productRepository.save(productEntity);
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
-
-
-    //CARGAR EL DTO DE PRODUCTO
     public ResponseEntity<Object> newProduct(ProductDTO productDTO){
         Product productEntity = productsMappers.productsDTOtoProductsEntity(productDTO);
         productRepository.save(productEntity);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // ********************* QUERY **********************************
-    //OBTENER LOS PRODUCTOS ORDENADOS POR PRECIO DESCENDIENTE
     public List<Product> getProductByPriceDesc(){
         return productRepository.findAllOrderByPriceDesc();
     }
-
 
     public void updateProductStock(Long id, Integer quantity) {
         Product product = productRepository.findById(id)

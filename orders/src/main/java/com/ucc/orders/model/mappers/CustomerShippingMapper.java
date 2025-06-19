@@ -36,7 +36,6 @@ public class CustomerShippingMapper {
         );
     }
 
-    // --- Mapeo de ShippingDetails ---
 
     public ShippingDetails shippingDetailsDTOToShippingDetails(ShippingDetailsDTO shippingDetailsDTO) {
         if (shippingDetailsDTO == null) {

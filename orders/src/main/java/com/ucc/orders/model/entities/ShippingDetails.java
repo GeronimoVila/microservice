@@ -39,7 +39,7 @@ public class ShippingDetails {
     private Double shippingCost;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", unique = true)  // sigue siendo la FK pero no la PK
+    @JoinColumn(name = "order_id", unique = true)
     @JsonBackReference
     private Order order;
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionsHandler {
 
-    //CAPTURA CUALQUIER EXCEPCION DEL TIPO PRODUCTNOTEXISTEXCEPTION
     @ExceptionHandler(ProductNotExistException.class)
     public ResponseEntity<ErrorMensajeDTO> productNotExist(HttpServletRequest request, ProductNotExistException ex){
         ErrorMensajeDTO errorMensajeDTO = new ErrorMensajeDTO(999, ex.getMessage(), request.getRequestURI());

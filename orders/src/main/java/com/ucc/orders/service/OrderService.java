@@ -58,21 +58,18 @@ public class OrderService {
 
         Customer customer = customerService.getCustomerById(orderDTO.getCustomerId());
 
-        // Verificar stock y existencia de productos
         for (var item : orderDTO.getOrderItems()) {
             verifyProductStock(item.getProductId(), item.getQuantity());
         }
 
         Order order = orderMapper.orderDTOToOrder(orderDTO, customer);
 
-        // Si viene shippingDetails en DTO, mapear y asignar
         if (orderDTO.getShippingDetails() != null) {
             ShippingDetails shippingDetails = shippingDetailsMapper.dtoToEntity(orderDTO.getShippingDetails());
             shippingDetails.setOrder(order);
             order.setShippingDetails(shippingDetails);
         }
 
-        // Calcular totales
         double totalAmount = 0.0;
         for (OrderItem item : order.getOrderItems()) {
             Double productPrice = getProductPrice(item.getProductId());

@@ -14,12 +14,10 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    //METODO PARA OBTENER TODAS LAS CATEGORIAS
     public List<Category> getCategories(){
         return categoryRepository.findAll();
     }
 
-    //METODO PARA CARGAR CATEGORIAS NUEVAS
     public ResponseEntity<Object> newCategory(Category category){
         categoryRepository.save(category);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -15,7 +15,6 @@ import java.util.Collections;
 @Configuration
 public class RestTemplateConfig {
 
-    // Estas son las credenciales del microservicio de PRODUCTOS
     @Value("${product.service.username}")
     private String productServiceUsername;
 
