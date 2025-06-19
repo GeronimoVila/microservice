@@ -76,4 +76,25 @@ public class ProductController {
     public List<Product> getProductPrice(){
         return productService.getProductByPriceDesc();
     }
+
+    // OBTENER PRECIO DE UN PRODUCTO POR ID
+    @GetMapping("/products/{id}/price")
+    @ResponseStatus(HttpStatus.OK)
+    public Double getProductPrice(@PathVariable Long id) {
+        return productService.getProductById(id).getPrice();
+    }
+
+    // OBTENER STOCK DE UN PRODUCTO POR ID
+    @GetMapping("/products/{id}/stock")
+    @ResponseStatus(HttpStatus.OK)
+    public Integer getProductStock(@PathVariable Long id) {
+        return productService.getProductById(id).getStock();
+    }
+
+    @PutMapping("/products/{id}/stock")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateStock(@PathVariable Long id, @RequestBody Integer quantity) {
+        productService.updateProductStock(id, quantity);
+    }
+
 }

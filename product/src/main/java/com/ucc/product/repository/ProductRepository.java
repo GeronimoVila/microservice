@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    // ********************* QUERY **********************************
-    //OBTENER LOS PRODUCTOS ORDENADOS POR PRECIO DESCENDIENTE
     @Query(value = "SELECT * FROM product ORDER BY price DESC", nativeQuery = true)
     List<Product> findAllOrderByPriceDesc();
 }

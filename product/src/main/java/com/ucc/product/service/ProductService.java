@@ -95,4 +95,12 @@ public class ProductService {
         return productRepository.findAllOrderByPriceDesc();
     }
 
+
+    public void updateProductStock(Long id, Integer quantity) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        product.setStock(quantity);
+        productRepository.save(product);
+    }
+
 }
